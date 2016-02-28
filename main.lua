@@ -106,8 +106,13 @@ function drawShowcase(item)
     
     love.graphics.push()
     
-    -- Fade objects out near the end of their zoom
-    local alpha = sx < 5 and 255 or (255 - 255 * (sx/10))
+    -- Fade objects in and out of view
+    local alpha = 255
+    if sx < 1 then
+        alpha = 255 * sx
+    elseif sx > 5 then
+        alpha = sx < 5 and 255 or (255 - 255 * (sx/10))
+    end
     
     -- position the item in a circular fashion
     local ix, iy = pointOnCircle(100 * sx, sx)
