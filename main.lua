@@ -11,7 +11,7 @@ showcase = {}
 -- Set the screen origin to the center, offset vertically to view
 -- showcase images nicely
 screenWidth, screenHeight = love.graphics.getDimensions()
-screenOrigin = {x = screenWidth / 2, y = screenHeight / 2 - 200}
+screenOrigin = {x = screenWidth / 2, y = screenHeight / 2}
 
 -- Simple number rounding function
 function round(num, idp)
@@ -114,7 +114,7 @@ function drawShowcase(item)
     end
     
     -- The diameter of the showcase view
-    local viewDiameter = 200
+    local viewDiameter = 150
     
     -- position the item in a circular fashion
     local ix, iy = pointOnCircle(viewDiameter * sx, sx + item.r % 6)
@@ -231,6 +231,9 @@ function calculateSizeFromUnits(size, unit)
    elseif unit == "n" then
        -- nano
        return size * 10^-9
+   elseif unit == "A" then
+       -- angstrom
+       return size * 10^-10
    elseif unit == "p" then
        -- pico
        return size * 10^-12
