@@ -117,7 +117,7 @@ function drawShowcase(item)
     local viewDiameter = 200
     
     -- position the item in a circular fashion
-    local ix, iy = pointOnCircle(viewDiameter * sx, sx % 6)
+    local ix, iy = pointOnCircle(viewDiameter * sx, sx + item.r % 6)
     
     -- draw a guide circle to indicate the bounds of this item (100px size)
     love.graphics.setColor({31, 31, 66, alpha * 0.1})
@@ -306,7 +306,8 @@ function addInventory(size, unit, name, image, description)
             x=0,
             y=0,
             ox=imageW / 2,
-            oy=imageH / 2
+            oy=imageH / 2,
+            r=#showcase % 6
             })
     
 end
