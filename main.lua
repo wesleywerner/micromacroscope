@@ -116,8 +116,13 @@ function drawShowcase(item)
     -- The diameter of the showcase view
     local viewDiameter = 150
     
+    -- The closer the showcase is in view, to more we focus it
+    -- to the center of the screen, i.e. reduce the diameter of the
+    -- view diamter.
+    local viewFocus = viewDiameter - (viewDiameter * sx * 0.1)
+    
     -- position the item in a circular fashion
-    local ix, iy = pointOnCircle(viewDiameter * sx, sx + item.r % 6)
+    local ix, iy = pointOnCircle(viewFocus, sx + item.r % 6)
     
     -- draw a guide circle to indicate the bounds of this item (100px size)
     love.graphics.setColor({31, 31, 66, alpha * 0.1})
@@ -132,7 +137,12 @@ function drawShowcase(item)
     -- draw image
     if item.image then
         love.graphics.setColor({255, 255, 255, alpha})
-        love.graphics.draw(item.image, 0, 0, sx-1.8, 1, 1, item.ox, item.oy)
+        love.graphics.draw(item.image, 
+            0, 0,       -- x, y
+            sx-1.8,     -- rotation
+            1, 1,       -- scale
+            item.ox,    -- offset x
+            item.oy)    -- offset y
     end
     
     -- draw title
