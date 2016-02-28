@@ -8,6 +8,11 @@ scopescale = 1
 
 showcase = {}
 
+-- Set the screen origin to the center, offset vertically to view
+-- showcase images nicely
+screenWidth, screenHeight = love.graphics.getDimensions()
+screenOrigin = {x = screenWidth / 2, y = screenHeight / 2 - 200}
+
 
 -- Simple number rounding function
 function round(num, idp)
@@ -78,9 +83,8 @@ function love.draw()
     -- New graphics stack for drawing the showcase
     love.graphics.push()
     
-    -- Center of window
-    local width, height = love.graphics.getDimensions()
-    love.graphics.translate(width / 2, height / 2)
+    -- Center screen around the origin
+    love.graphics.translate(screenOrigin.x, screenOrigin.y)
     
     for _, item in ipairs(showcase) do
         drawShowcase(item)
