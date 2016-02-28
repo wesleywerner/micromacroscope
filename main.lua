@@ -213,7 +213,7 @@ function buildShowcase()
         love.graphics.newImage("images/coffee-bean.png"), "")
     
     addShowcase(25, "c", "Cat",
-        love.graphics.newImage("images/cat.jpg"), "")
+        love.graphics.newImage("images/cat.png"), "")
     
     addShowcase(1.83, "", "Human", 
         love.graphics.newImage("images/human.png"), "")
