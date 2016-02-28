@@ -16,6 +16,16 @@ function round(num, idp)
 end
 
 
+-- Determine the x,y coordinates on circle based on given angle.
+-- Assume the circle is draw at origin 0,0
+function pointOnCircle(radius, angle)
+    -- convert angle into degrees
+    --angle = math.pi / 2
+    local x = (radius * math.cos(angle))
+    local y = (radius * math.sin(angle))
+    return x, y
+end
+
 function love.load(arg)
     
     love.graphics.setBackgroundColor(LIGHTBLUE)
@@ -62,6 +72,9 @@ function love.draw()
     love.graphics.setColor({31, 31, 66, 192})
     love.graphics.print("scope scale: " .. tostring(scopescale))
         
+    local fps = love.timer.getFPS()
+    love.graphics.print("fps: " .. tostring(fps), 0, 20)
+
     -- New graphics stack for drawing the showcase
     love.graphics.push()
     
@@ -89,7 +102,13 @@ function drawShowcase(item)
     love.graphics.push()
     
     -- position the item in a circular fashion
-    love.graphics.translate(item.x, item.y)
+    local ix, iy = pointOnCircle(100 * sx, sx)
+    
+    -- draw a guide circle to indicate the bounds of this item (100px size)
+    --love.graphics.circle("line", 0, 0, 100 * sx)
+    
+    -- translate position of the item
+    love.graphics.translate(ix, iy)
     
     -- scale the item
     love.graphics.scale(sx, sx)
@@ -147,6 +166,27 @@ function buildShowcase()
     addInventory(0.0000001, "m", "Ten Millionth", nil, nil)
     addInventory(0.00000001, "m", "Hun Millionth", nil, nil)
     addInventory(0.000000001, "m", "Billionth", nil, nil)
+
+    addInventory(2, "m", "2", nil, nil)
+    addInventory(3, "m", "3", nil, nil)
+    addInventory(4, "m", "4", nil, nil)
+    addInventory(5, "m", "5", nil, nil)
+    addInventory(15, "m", "15", nil, nil)
+    addInventory(25, "m", "25", nil, nil)
+    addInventory(35, "m", "35", nil, nil)
+    addInventory(55, "m", "55", nil, nil)
+    addInventory(70, "m", "70", nil, nil)
+    addInventory(85, "m", "85", nil, nil)
+    addInventory(90, "m", "90", nil, nil)
+
+    addInventory(200, "m", "200", nil, nil)
+    addInventory(300, "m", "300", nil, nil)
+    addInventory(400, "m", "400", nil, nil)
+    addInventory(500, "m", "500", nil, nil)
+    addInventory(600, "m", "600", nil, nil)
+    addInventory(700, "m", "700", nil, nil)
+    addInventory(800, "m", "800", nil, nil)
+    addInventory(900, "m", "900", nil, nil)
 
 end
 
