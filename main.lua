@@ -112,8 +112,16 @@ function drawShowcase(item)
     
     -- scale the item
     love.graphics.scale(sx, sx)
+    
+    -- draw image
+    if item.image then
+        love.graphics.draw(item.image, 0, 0, sx-1.8, 1, 1, item.ox, item.oy)
+    end
+    
+    -- draw title
     love.graphics.setColor({31, 31, 31, 255})
     love.graphics.print(item.name)
+    
     love.graphics.pop()
     
 end
@@ -188,10 +196,18 @@ function buildShowcase()
     addInventory(800, "m", "800", nil, nil)
     addInventory(900, "m", "900", nil, nil)
 
+    addInventory(1.83, "m", "Human", love.graphics.newImage("images/human.png"), "")
+
 end
 
 
 function addInventory(size, units, name, image, description)
+    
+    local imageW, imageH = 0, 0
+    
+    if image then
+        imageW, imageH = image:getDimensions()
+    end
     
     table.insert(showcase, 
         {
@@ -200,7 +216,9 @@ function addInventory(size, units, name, image, description)
             image=image,
             description=description,
             x=0,
-            y=0
+            y=0,
+            ox=imageW / 2,
+            oy=imageH / 2
             })
     
 end
