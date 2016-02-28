@@ -4,7 +4,7 @@ LIGHTBLUE = {149, 250, 255}
 
 timers = {}
 
-scopescale = 1
+scopescale = 0.16
 
 showcase = {}
 
@@ -234,7 +234,15 @@ function buildShowcase()
     
     addShowcase(1.83, "", "Human", 
         love.graphics.newImage("images/human.png"), "")
+        
+    addShowcase(5.486, "", "Giraffe",
+        love.graphics.newImage("images/giraffe.png"), "")
     
+    addShowcase(30, "", "TV Radio Wavelength",
+        love.graphics.newImage("images/wave.png"), "")
+    
+    addShowcase(354, "k", "ISS Altitude",
+        love.graphics.newImage("images/iss.png"), "")
 
 end
 
