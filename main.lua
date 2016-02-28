@@ -13,7 +13,6 @@ showcase = {}
 screenWidth, screenHeight = love.graphics.getDimensions()
 screenOrigin = {x = screenWidth / 2, y = screenHeight / 2 - 200}
 
-
 -- Simple number rounding function
 function round(num, idp)
   local mult = 10^(idp or 0)
@@ -114,12 +113,15 @@ function drawShowcase(item)
         alpha = sx < 5 and 255 or (255 - 255 * (sx/10))
     end
     
+    -- The diameter of the showcase view
+    local viewDiameter = 200
+    
     -- position the item in a circular fashion
-    local ix, iy = pointOnCircle(100 * sx, sx)
+    local ix, iy = pointOnCircle(viewDiameter * sx, sx % 6)
     
     -- draw a guide circle to indicate the bounds of this item (100px size)
     love.graphics.setColor({31, 31, 66, alpha * 0.1})
-    love.graphics.circle("line", 0, 0, 100 * sx)
+    love.graphics.circle("line", 0, 0, viewDiameter * sx)
     
     -- translate position of the item
     love.graphics.translate(ix, iy)
