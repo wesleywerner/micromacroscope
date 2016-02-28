@@ -202,6 +202,9 @@ function buildShowcase()
     addShowcase(12, "m", "Coffee Bean",
         love.graphics.newImage("images/coffee-bean.png"), "")
     
+    addShowcase(25, "c", "Cat",
+        love.graphics.newImage("images/cat.jpg"), "")
+    
     addShowcase(1.83, "", "Human", 
         love.graphics.newImage("images/human.png"), "")
     
