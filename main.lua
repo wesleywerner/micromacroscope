@@ -191,11 +191,18 @@ function buildShowcase()
     addInventory(1, "z", "zeptometer")
     addInventory(1, "y", "yoctometer")
 
+    addInventory(70, "p", "Carbon Atom", 
+        love.graphics.newImage("images/carbon.png"), "")
+    
+    addInventory(2, "m", "Fire Ant",
+        love.graphics.newImage("images/fire-ant.png"), "")
+    
+    addInventory(12, "m", "Coffee Bean",
+        love.graphics.newImage("images/coffee-bean.png"), "")
+    
     addInventory(1.83, "", "Human", 
         love.graphics.newImage("images/human.png"), "")
     
-    addInventory(70, "p", "Carbon Atom", 
-        love.graphics.newImage("images/carbon.png"), "")
 
 end
 
