@@ -244,6 +244,9 @@ function buildShowcase()
     addShowcase(354, "k", "ISS Altitude",
         love.graphics.newImage("images/iss.png"), "")
 
+    addShowcase(3474.8, "k", "Diameter of the Moon",
+        love.graphics.newImage("images/moon.png"), "")
+    
 end
 
 
