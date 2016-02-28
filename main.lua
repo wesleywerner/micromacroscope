@@ -69,6 +69,17 @@ function love.update(dt)
     
     updateTimers(dt)
     
+    local zoomamount = 0.1
+    
+    if love.keyboard.isDown('w') then
+        scopescale = scopescale - (scopescale * zoomamount)
+    end
+    
+    if love.keyboard.isDown('s') then
+        scopescale = scopescale + (scopescale * zoomamount)
+    end
+
+    
 end
 
 
@@ -205,6 +216,12 @@ function buildShowcase()
 
     addShowcase(70, "p", "Carbon Atom", 
         love.graphics.newImage("images/carbon.png"), "")
+    
+    addShowcase(8, "u", "Red Blood Cell",
+        love.graphics.newImage("images/red-blood-cell.png"), "")
+    
+    addShowcase(100, "u", "Grain of Salt",
+        love.graphics.newImage("images/salt.png"), "")
     
     addShowcase(2, "m", "Fire Ant",
         love.graphics.newImage("images/fire-ant.png"), "")
