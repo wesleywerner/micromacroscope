@@ -188,6 +188,9 @@ function buildShowcase()
 
     addInventory(1.83, "", "Human", 
         love.graphics.newImage("images/human.png"), "")
+    
+    addInventory(70, "p", "Carbon Atom", 
+        love.graphics.newImage("images/carbon.png"), "")
 
 end
 
