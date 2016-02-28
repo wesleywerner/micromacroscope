@@ -35,7 +35,8 @@ function love.load(arg)
     
     love.graphics.setBackgroundColor(LIGHTBLUE)
     
-    addTimer(buildShowcase, 0)
+    --addTimer(buildShowcase, 0)
+    buildShowcase()
     
 end
 
@@ -105,11 +106,15 @@ function drawShowcase(item)
     
     love.graphics.push()
     
+    -- Fade objects out near the end of their zoom
+    local alpha = sx < 5 and 255 or (255 - 255 * (sx/10))
+    
     -- position the item in a circular fashion
     local ix, iy = pointOnCircle(100 * sx, sx)
     
     -- draw a guide circle to indicate the bounds of this item (100px size)
-    --love.graphics.circle("line", 0, 0, 100 * sx)
+    love.graphics.setColor({31, 31, 66, alpha * 0.1})
+    love.graphics.circle("line", 0, 0, 100 * sx)
     
     -- translate position of the item
     love.graphics.translate(ix, iy)
@@ -119,11 +124,12 @@ function drawShowcase(item)
     
     -- draw image
     if item.image then
+        love.graphics.setColor({255, 255, 255, alpha})
         love.graphics.draw(item.image, 0, 0, sx-1.8, 1, 1, item.ox, item.oy)
     end
     
     -- draw title
-    love.graphics.setColor({31, 31, 31, 255})
+    love.graphics.setColor({31, 31, 31, alpha})
     love.graphics.print(item.name)
     
     love.graphics.pop()
