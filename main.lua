@@ -158,54 +158,113 @@ end
 
 function buildShowcase()
     
-    addInventory(1000000000, "m", "Billion", nil, nil)
-    addInventory(100000000, "m", "Hun Million", nil, nil)
-    addInventory(10000000, "m", "Ten Million", nil, nil)
-    addInventory(1000000, "m", "Million", nil, nil)
-    addInventory(100000, "m", "Hundred Thousand", nil, nil)
-    addInventory(10000, "m", "Ten Thousand", nil, nil)
-    addInventory(1000, "m", "Thousand", nil, nil)
-    addInventory(100, "m", "Hundred", nil, nil)
-    addInventory(10, "m", "Ten", nil, nil)
+    addInventory(1, "Y", "yottameter")
+    addInventory(1, "Z", "zettameter")
+    addInventory(1, "E", "exameter")
+    addInventory(1, "P", "petameter")
+    addInventory(1, "T", "terameter")
+    addInventory(1, "G", "gigameter")
+    addInventory(1, "M", "megameter")
+    addInventory(1, "k", "kilometer")
+    addInventory(1, "h", "hectometer")
+    addInventory(1, "da", "decameter")
+    addInventory(1, "", "meter")
+    addInventory(1, "d", "decimeter")
+    addInventory(1, "c", "centimeter")
+    addInventory(1, "m", "millimeter")
+    addInventory(1, "u", "micrometer")
+    addInventory(1, "n", "nanometer")
+    addInventory(1, "p", "picometer")
+    addInventory(1, "f", "femtometer")
+    addInventory(1, "a", "attometer")
+    addInventory(1, "z", "zeptometer")
+    addInventory(1, "y", "yoctometer")
 
-    addInventory(1, "m", "One Metre", nil, nil)
-    addInventory(0.1, "m", "Tenth Metre", nil, nil)
-    addInventory(0.01, "m", "Hundreth Metre", nil, nil)
-    addInventory(0.001, "m", "Thousanth Metre", nil, nil)
-    addInventory(0.0001, "m", "Ten Thousanth", nil, nil)
-    addInventory(0.00001, "m", "Hun Thousanth", nil, nil)
-    addInventory(0.000001, "m", "Millionth", nil, nil)
-    addInventory(0.0000001, "m", "Ten Millionth", nil, nil)
-    addInventory(0.00000001, "m", "Hun Millionth", nil, nil)
-    addInventory(0.000000001, "m", "Billionth", nil, nil)
-
-    addInventory(2, "m", "2", nil, nil)
-    addInventory(3, "m", "3", nil, nil)
-    addInventory(4, "m", "4", nil, nil)
-    addInventory(5, "m", "5", nil, nil)
-    addInventory(15, "m", "15", nil, nil)
-    addInventory(25, "m", "25", nil, nil)
-    addInventory(35, "m", "35", nil, nil)
-    addInventory(55, "m", "55", nil, nil)
-    addInventory(70, "m", "70", nil, nil)
-    addInventory(85, "m", "85", nil, nil)
-    addInventory(90, "m", "90", nil, nil)
-
-    addInventory(200, "m", "200", nil, nil)
-    addInventory(300, "m", "300", nil, nil)
-    addInventory(400, "m", "400", nil, nil)
-    addInventory(500, "m", "500", nil, nil)
-    addInventory(600, "m", "600", nil, nil)
-    addInventory(700, "m", "700", nil, nil)
-    addInventory(800, "m", "800", nil, nil)
-    addInventory(900, "m", "900", nil, nil)
-
-    addInventory(1.83, "m", "Human", love.graphics.newImage("images/human.png"), "")
+    addInventory(1.83, "", "Human", 
+        love.graphics.newImage("images/human.png"), "")
 
 end
 
 
-function addInventory(size, units, name, image, description)
+-- Calculate the size of an object from it's relative size and unit of measure.
+-- We use the metric system of SI units, meters is the base unit and is
+-- indicated by an empty prefix unit.
+-- https://en.wikipedia.org/wiki/Metric_prefix
+function calculateSizeFromUnits(size, unit)
+   
+   -- Fractions (small things)
+   if unit == "d" then
+       -- deci
+       return size * 10^-1
+   elseif unit == "c" then
+       -- centi
+       return size * 10^-2
+   elseif unit == "m" then
+       -- milli
+       return size * 10^-3
+   elseif unit == "u" then
+       -- micro
+       return size * 10^-6
+   elseif unit == "n" then
+       -- nano
+       return size * 10^-9
+   elseif unit == "p" then
+       -- pico
+       return size * 10^-12
+   elseif unit == "f" then
+       -- femto
+       return size * 10^-15
+   elseif unit == "a" then
+       -- atto
+       return size * 10^-18
+   elseif unit == "z" then
+       -- zepto
+       return size * 10^-21
+   elseif unit == "y" then
+       -- yocto
+       return size * 10^-24
+   end
+   
+   -- Multiples (large things)
+   if unit == "da" then
+       -- deca
+       return size * 10^1
+   elseif unit == "h" then
+       -- hecto
+       return size * 10^2
+   elseif unit == "k" then
+       -- kilo
+       return size * 10^3
+   elseif unit == "M" then
+       -- mega
+       return size * 10^6
+   elseif unit == "G" then
+       -- Giga
+       return size * 10^9
+   elseif unit == "T" then
+       -- tera
+       return size * 10^12
+   elseif unit == "P" then
+       -- peta
+       return size * 10^15
+   elseif unit == "E" then
+       -- exa
+       return size * 10^18
+   elseif unit == "Z" then
+       -- zeta
+       return size * 10^21
+   elseif unit == "Y" then
+       -- yota
+       return size * 10^24
+   end
+   
+   -- Uncalculated for unknown units of measure
+   return size
+    
+end
+
+
+function addInventory(size, unit, name, image, description)
     
     local imageW, imageH = 0, 0
     
@@ -215,7 +274,9 @@ function addInventory(size, units, name, image, description)
     
     table.insert(showcase, 
         {
-            size=size,
+            sizeFormatted=tostring(size) .. unit,
+            size=calculateSizeFromUnits(size, unit),
+            unit=unit,
             name=name,
             image=image,
             description=description,
