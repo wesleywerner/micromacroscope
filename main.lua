@@ -171,38 +171,38 @@ end
 
 function buildShowcase()
     
-    addInventory(1, "Y", "yottameter")
-    addInventory(1, "Z", "zettameter")
-    addInventory(1, "E", "exameter")
-    addInventory(1, "P", "petameter")
-    addInventory(1, "T", "terameter")
-    addInventory(1, "G", "gigameter")
-    addInventory(1, "M", "megameter")
-    addInventory(1, "k", "kilometer")
-    addInventory(1, "h", "hectometer")
-    addInventory(1, "da", "decameter")
-    addInventory(1, "", "meter")
-    addInventory(1, "d", "decimeter")
-    addInventory(1, "c", "centimeter")
-    addInventory(1, "m", "millimeter")
-    addInventory(1, "u", "micrometer")
-    addInventory(1, "n", "nanometer")
-    addInventory(1, "p", "picometer")
-    addInventory(1, "f", "femtometer")
-    addInventory(1, "a", "attometer")
-    addInventory(1, "z", "zeptometer")
-    addInventory(1, "y", "yoctometer")
+    addShowcase(1, "Y", "yottameter")
+    addShowcase(1, "Z", "zettameter")
+    addShowcase(1, "E", "exameter")
+    addShowcase(1, "P", "petameter")
+    addShowcase(1, "T", "terameter")
+    addShowcase(1, "G", "gigameter")
+    addShowcase(1, "M", "megameter")
+    addShowcase(1, "k", "kilometer")
+    addShowcase(1, "h", "hectometer")
+    addShowcase(1, "da", "decameter")
+    addShowcase(1, "", "meter")
+    addShowcase(1, "d", "decimeter")
+    addShowcase(1, "c", "centimeter")
+    addShowcase(1, "m", "millimeter")
+    addShowcase(1, "u", "micrometer")
+    addShowcase(1, "n", "nanometer")
+    addShowcase(1, "p", "picometer")
+    addShowcase(1, "f", "femtometer")
+    addShowcase(1, "a", "attometer")
+    addShowcase(1, "z", "zeptometer")
+    addShowcase(1, "y", "yoctometer")
 
-    addInventory(70, "p", "Carbon Atom", 
+    addShowcase(70, "p", "Carbon Atom", 
         love.graphics.newImage("images/carbon.png"), "")
     
-    addInventory(2, "m", "Fire Ant",
+    addShowcase(2, "m", "Fire Ant",
         love.graphics.newImage("images/fire-ant.png"), "")
     
-    addInventory(12, "m", "Coffee Bean",
+    addShowcase(12, "m", "Coffee Bean",
         love.graphics.newImage("images/coffee-bean.png"), "")
     
-    addInventory(1.83, "", "Human", 
+    addShowcase(1.83, "", "Human", 
         love.graphics.newImage("images/human.png"), "")
     
 
@@ -290,7 +290,7 @@ function calculateSizeFromUnits(size, unit)
 end
 
 
-function addInventory(size, unit, name, image, description)
+function addShowcase(size, unit, name, image, description)
     
     local imageW, imageH = 0, 0
     
