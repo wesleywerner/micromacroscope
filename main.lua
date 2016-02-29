@@ -6,6 +6,8 @@ timers = {}
 
 scopescale = 0.16
 
+targetscale = scopescale
+
 showcase = {}
 
 -- Set the screen origin to the center, offset vertically to view
@@ -31,11 +33,14 @@ function pointOnCircle(radius, angle)
 end
 
 
-function zoomScope(direction)
+-- zoom the micro and macro scopes in and out
+function zoomScope(zoomIn)
     
-    local zoomamount = 0.1
+    local zoomamount = 0.7
     
-    scopescale = scopescale + (scopescale * zoomamount) * direction
+    local direction = zoomIn and 1 or -1
+    
+    targetscale = scopescale + (scopescale * zoomamount) * direction
     
 end
 
@@ -62,11 +67,11 @@ end
 function love.mousepressed(x, y, button)
     
     if button == "wu" then
-        zoomScope(-1)
+        zoomScope(false)
     end
     
     if button == "wd" then
-        zoomScope(1)
+        zoomScope(true)
     end
     
 end
@@ -77,12 +82,18 @@ function love.update(dt)
     updateTimers(dt)
     
     if love.keyboard.isDown('w') then
-        zoomScope(-1)
+        zoomScope(false)
     end
     
     if love.keyboard.isDown('s') then
-        zoomScope(1)
+        zoomScope(true)
     end
+    
+    -- Move the scope scale towards the target scale
+    -- Use easing to transition the change smoothly
+    local diff = (targetscale - scopescale)
+    local sign = (targetscale - scopescale < 0) and -1 or 1
+    scopescale = scopescale + (math.abs(diff) * 0.1 * sign)    
 
 end
 
