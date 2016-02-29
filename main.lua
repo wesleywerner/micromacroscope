@@ -30,6 +30,16 @@ function pointOnCircle(radius, angle)
     return x, y
 end
 
+
+function zoomScope(direction)
+    
+    local zoomamount = 0.1
+    
+    scopescale = scopescale + (scopescale * zoomamount) * direction
+    
+end
+
+
 function love.load(arg)
     
     love.graphics.setBackgroundColor(LIGHTBLUE)
@@ -51,16 +61,13 @@ end
 
 function love.mousepressed(x, y, button)
     
-    local zoomamount = 0.1
-    
     if button == "wu" then
-        scopescale = scopescale - (scopescale * zoomamount)
+        zoomScope(-1)
     end
     
     if button == "wd" then
-        scopescale = scopescale + (scopescale * zoomamount)
+        zoomScope(1)
     end
-    
     
 end
 
@@ -69,17 +76,14 @@ function love.update(dt)
     
     updateTimers(dt)
     
-    local zoomamount = 0.1
-    
     if love.keyboard.isDown('w') then
-        scopescale = scopescale - (scopescale * zoomamount)
+        zoomScope(-1)
     end
     
     if love.keyboard.isDown('s') then
-        scopescale = scopescale + (scopescale * zoomamount)
+        zoomScope(1)
     end
 
-    
 end
 
 
