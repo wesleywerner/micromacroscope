@@ -165,7 +165,7 @@ function drawShowcase(item)
         love.graphics.setColor({255, 255, 255, alpha})
         love.graphics.draw(item.image, 
             0, 0,       -- x, y
-            sx-1.8,     -- rotation
+            0,          -- rotation
             1, 1,       -- scale
             item.ox,    -- offset x
             item.oy)    -- offset y
