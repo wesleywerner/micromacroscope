@@ -49,6 +49,8 @@ function love.load(arg)
     
     love.graphics.setBackgroundColor(LIGHTBLUE)
     
+    smallFont = love.graphics.newFont(20)
+    
     --addTimer(buildShowcase, 0)
     buildShowcase()
     
@@ -171,13 +173,48 @@ function drawShowcase(item)
             item.oy)    -- offset y
     end
     
-    -- draw title
-    love.graphics.setColor({31, 31, 31, alpha})
-    love.graphics.print(item.name)
-    
     love.graphics.pop()
     
+    -- draw showcase label
+    drawShowcaseLabel(sx, 
+        {x=ix, y=iy}, 
+        item.image and {item.image:getDimensions()},
+        item.name, item.description)
+        
 end
+
+
+function drawShowcaseLabel(scale, position, size, name, description)
+    
+    if scale < 1 or scale > 5 then return end
+    
+    local boxWidth = 150
+    local boxHeight = 70
+    
+    -- fixed position relative to translated center
+    --position = { x = -screenWidth / 2, y = screenHeight / 2 - boxHeight}
+    
+    love.graphics.push()
+    
+    -- box fill
+    love.graphics.setColor({255, 255, 255, 128})
+    love.graphics.rectangle("fill", position.x, position.y, boxWidth, boxHeight)
+    
+    -- outline
+    love.graphics.setLineWidth(4)
+    love.graphics.setColor({255, 255, 255, 192})
+    love.graphics.rectangle("line", position.x, position.y, boxWidth, boxHeight)
+    
+    -- draw title
+    love.graphics.setColor({0, 0, 0, 192})
+    
+    love.graphics.setFont(smallFont)
+    love.graphics.printf(name, position.x, position.y, boxWidth, "center")
+    
+    love.graphics.pop()
+
+end
+
 
 
 function addTimer(func, delay)
