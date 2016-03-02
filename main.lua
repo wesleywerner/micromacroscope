@@ -332,10 +332,14 @@ function buildShowcase()
     addShowcase(70, "p", "Carbon Atom", 
         love.graphics.newImage("images/carbon.png"), "")
     
+    addShowcase(220, "n", "Smallpox Virus")
+    
     addShowcase(8, "u", "Red Blood Cell",
         love.graphics.newImage("images/red-blood-cell.png"), "")
     
-    addShowcase(100, "u", "Grain of Salt",
+    addShowcase(180, "u", "1000x Optical Magnification")
+    
+    addShowcase(0.3, "m", "Grain of Salt",
         love.graphics.newImage("images/salt.png"), "")
     
     addShowcase(2, "m", "Fire Ant",
