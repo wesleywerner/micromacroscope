@@ -54,6 +54,9 @@ function love.load(arg)
     --addTimer(buildShowcase, 0)
     buildShowcase()
     
+    normalizeScale(-5, -10, 10, true)
+    normalizeScale(500, -1000, 1000, true)
+    local n = normalizeScale(10^23, 10^-24, 10^24, true)
 end
 
 
@@ -120,6 +123,54 @@ function love.draw()
     
     love.graphics.pop()
     
+    -- Reset translation
+    love.graphics.origin()
+    drawInfobar()
+    
+end
+
+
+function drawInfobar()
+    
+    love.graphics.push()
+    
+    local barHeight = 60
+    local lineMarginFromBottom = 0
+    
+    -- fill
+    love.graphics.setColor({255, 255, 255, 192})
+    
+    love.graphics.rectangle("fill", 0, 
+        screenHeight - barHeight, screenWidth, barHeight)
+    
+    -- outline
+    love.graphics.setLineWidth(3)
+    
+    love.graphics.setColor({255, 255, 255, 192})
+
+    love.graphics.rectangle("line", 0, 
+        screenHeight - barHeight, screenWidth, barHeight)
+    
+    -- guideline
+    love.graphics.setColor({0, 0, 0, 192})
+    
+    love.graphics.setLineWidth(6)
+    
+    love.graphics.line(0, screenHeight - lineMarginFromBottom, 
+        screenWidth, screenHeight - lineMarginFromBottom)
+    
+    -- scale indicator
+    
+    local scaleNormal = normalizeScale(scopescale, -10^24, 10^24)
+    local scalePosition = screenWidth * scaleNormal
+    
+    love.graphics.print('zoom normal: ' .. tostring(scaleNormal), 0, 40)
+    
+        
+    love.graphics.circle("fill", scalePosition, screenHeight - 20, 10)
+    
+    love.graphics.pop()
+
 end
 
 
@@ -213,6 +264,18 @@ function drawShowcaseLabel(scale, position, size, name, description)
     
     love.graphics.pop()
 
+end
+
+
+-- Gives the normalized value of the current scale
+function normalizeScale(n, a, b, test)
+    
+    if test then
+        print('normalize ' .. n .. ' into ' .. a .. '..' .. b .. ' Result: ' .. (n-a)/(b-a))
+    end
+    
+    return (n-a)/(b-a)
+    
 end
 
 
