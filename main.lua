@@ -54,9 +54,9 @@ function love.load(arg)
     --addTimer(buildShowcase, 0)
     buildShowcase()
     
-    normalizeScale(-5, -10, 10, true)
-    normalizeScale(500, -1000, 1000, true)
-    local n = normalizeScale(10^23, 10^-24, 10^24, true)
+    log10max = math.log10(10^24)
+    scaleWidthRatio = screenWidth / 2
+
 end
 
 
@@ -134,7 +134,7 @@ function drawInfobar()
     
     love.graphics.push()
     
-    local barHeight = 60
+    local barHeight = 40
     local lineMarginFromBottom = 0
     
     -- fill
@@ -152,22 +152,21 @@ function drawInfobar()
         screenHeight - barHeight, screenWidth, barHeight)
     
     -- guideline
-    love.graphics.setColor({0, 0, 0, 192})
-    
+    love.graphics.setColor({0, 128, 0, 96})
     love.graphics.setLineWidth(6)
-    
     love.graphics.line(0, screenHeight - lineMarginFromBottom, 
         screenWidth, screenHeight - lineMarginFromBottom)
     
-    -- scale indicator
-    
-    local scaleNormal = normalizeScale(scopescale, -10^24, 10^24)
-    local scalePosition = screenWidth * scaleNormal
-    
-    love.graphics.print('zoom normal: ' .. tostring(scaleNormal), 0, 40)
-    
-        
-    love.graphics.circle("fill", scalePosition, screenHeight - 20, 10)
+    -- draw the scale indicator
+    -- our arrow is a triangle poly
+    local log10scope = math.log10(scopescale)
+    local scalePosition = scaleWidthRatio + log10scope / log10max * scaleWidthRatio
+    local vertices = {-10, -10, 10, -10, 0, 10}
+    love.graphics.push()
+    love.graphics.translate(scalePosition, screenHeight - 10)
+    love.graphics.setColor({0, 128, 0, 192})
+    love.graphics.polygon('fill', vertices)
+    love.graphics.pop()
     
     love.graphics.pop()
 
@@ -265,19 +264,6 @@ function drawShowcaseLabel(scale, position, size, name, description)
     love.graphics.pop()
 
 end
-
-
--- Gives the normalized value of the current scale
-function normalizeScale(n, a, b, test)
-    
-    if test then
-        print('normalize ' .. n .. ' into ' .. a .. '..' .. b .. ' Result: ' .. (n-a)/(b-a))
-    end
-    
-    return (n-a)/(b-a)
-    
-end
-
 
 
 function addTimer(func, delay)
