@@ -323,6 +323,9 @@ function buildShowcase()
     addShowcase(8, "u", "Red Blood Cell",
         love.graphics.newImage("images/red-blood-cell.png"), "")
     
+    addShowcase(20, "u", "Intel 4004 transistor",
+        love.graphics.newImage("images/intel-4004-chip.png"), "")
+    
     addShowcase(180, "u", "1000x Optical Magnification")
     
     addShowcase(0.3, "m", "Grain of Salt",
