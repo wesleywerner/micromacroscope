@@ -351,6 +351,10 @@ function buildShowcase()
     addShowcase(30, "", "TV Radio Wavelength",
         love.graphics.newImage("images/wave.png"), "")
     
+    addShowcase(8.848, "k", "Mount Everest",
+        love.graphics.newImage("images/mount-everest.png"),
+        "8.848 km is the height of Mount Everest, the highest peak on Earth, on the border between Nepal and China.")
+    
     addShowcase(354, "k", "ISS Altitude",
         love.graphics.newImage("images/iss.png"), "")
 
