@@ -357,6 +357,17 @@ function buildShowcase()
     addShowcase(3474.8, "k", "Diameter of the Moon",
         love.graphics.newImage("images/moon.png"), "")
     
+    
+    addShowcase(9.461, "T", "Light Year",
+        love.graphics.newImage("images/light_year.png"),
+        "The distance that light travels in one year, which is 9.4607 × 1012 km")
+    
+    addShowcase(0.1267774, "Y", "GN-z11 Galaxy",
+        love.graphics.newImage("images/GN-z11-galaxy.png"), 
+        "On March 3, 2016 NASA’s Hubble Space Telescope shattered the cosmic distance record by measuring the farthest galaxy ever seen in the universe. GN-z11, is seen as it was 13.4 billion years in the past, a time when the universe was only three percent of its current age.")
+    
+    --addShowcase(0.1296157, "Y", "Age of the Universe")
+    
 end
 
 
