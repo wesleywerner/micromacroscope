@@ -362,6 +362,14 @@ function buildShowcase()
         love.graphics.newImage("images/light_year.png"),
         "The distance that light travels in one year, which is 9.4607 × 1012 km")
     
+    addShowcase(41.2, "T", "Alpha Centauri",
+        love.graphics.newImage("images/alpha-centauri.png"),
+        "The closest star system to us is a mere 4.37 light years away.")
+    
+    addShowcase(925, "P", "Milky Way Galaxy",
+        love.graphics.newImage("images/milkyway.png"),
+        "Our home galaxy is 925,000,000,000,000,000 km across. The Sun does not lie near the center of our Galaxy. It lies about 8 kiloparsecs from the center on what is known as the Sagittarius arm of the Milky Way.")
+    
     addShowcase(0.1267774, "Y", "GN-z11 Galaxy",
         love.graphics.newImage("images/GN-z11-galaxy.png"), 
         "On March 3, 2016 NASA’s Hubble Space Telescope shattered the cosmic distance record by measuring the farthest galaxy ever seen in the universe. GN-z11, is seen as it was 13.4 billion years in the past, a time when the universe was only three percent of its current age.")
