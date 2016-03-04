@@ -192,7 +192,7 @@ function drawShowcase(item)
     end
     
     -- The diameter of the showcase view
-    local viewDiameter = 150
+    local viewDiameter = screenHeight / 2
     
     -- The closer the showcase is in view, to more we focus it
     -- to the center of the screen, i.e. reduce the diameter of the
@@ -200,17 +200,18 @@ function drawShowcase(item)
     local viewFocus = viewDiameter - (viewDiameter * sx * 0.1)
     
     -- position the item in a circular fashion
-    local ix, iy = pointOnCircle(viewFocus, sx + item.r % 6)
+    local ix, iy = pointOnCircle(viewFocus, (sx + item.r) % 6)
     
     -- draw a guide circle to indicate the bounds of this item (100px size)
-    love.graphics.setColor({31, 31, 66, alpha * 0.1})
-    love.graphics.circle("line", 0, 0, viewDiameter * sx)
+    --love.graphics.setColor({31, 31, 66, alpha * 0.1})
+    --love.graphics.circle("line", 0, 0, viewDiameter * sx)
     
     -- translate position of the item
     love.graphics.translate(ix, iy)
     
     -- scale the item
-    love.graphics.scale(sx, sx)
+    local scaleClamped = clamp(0, sx, 2)
+    love.graphics.scale(scaleClamped, scaleClamped)
     
     -- draw image
     if item.image then
@@ -318,7 +319,8 @@ function buildShowcase()
     addShowcase(70, "p", "Carbon Atom", 
         love.graphics.newImage("images/carbon.png"), "")
     
-    addShowcase(220, "n", "Smallpox Virus")
+    addShowcase(120, "n", "Flu Virus",
+        love.graphics.newImage("images/flu-virus.png"), "")
     
     addShowcase(8, "u", "Red Blood Cell",
         love.graphics.newImage("images/red-blood-cell.png"), "")
@@ -464,3 +466,7 @@ function addShowcase(size, unit, name, image, description)
     
 end
 
+-- Limit value to a range of min and max
+function clamp(min, value, max)
+    return math.max(min, math.min(max, value))
+end
