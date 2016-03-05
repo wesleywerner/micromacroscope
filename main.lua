@@ -10,6 +10,10 @@ targetscale = scopescale
 
 showcase = {}
 
+infoboxes = {}
+
+infoboxWidth = 200
+
 -- Set the screen origin to the center, offset vertically to view
 -- showcase images nicely
 screenWidth, screenHeight = love.graphics.getDimensions()
@@ -49,7 +53,10 @@ function love.load(arg)
     
     love.graphics.setBackgroundColor(LIGHTBLUE)
     
-    smallFont = love.graphics.newFont(20)
+    smallFont = love.graphics.newFont(16)
+    infoFont = love.graphics.newFont(12)
+    
+    smallFontHeight = smallFont:getHeight()
     
     --addTimer(buildShowcase, 0)
     buildShowcase()
@@ -108,6 +115,7 @@ end
 function love.draw()
     
     setBackground()
+    infoboxes = {}
     love.graphics.setColor({31, 31, 66, 192})
     love.graphics.print("scope scale: " .. tostring(scopescale))
         
@@ -129,6 +137,7 @@ function love.draw()
     -- Reset translation
     love.graphics.origin()
     drawInfobar()
+    drawInfoboxes()
     
 end
 
@@ -256,44 +265,53 @@ function drawShowcase(item)
     
     love.graphics.pop()
     
-    -- draw showcase label
-    drawShowcaseLabel(sx, 
-        {x=ix, y=iy}, 
-        item.image and {item.image:getDimensions()},
-        item.name, item.description)
-        
+    
+    table.insert(infoboxes, item)
+    
 end
 
 
-function drawShowcaseLabel(scale, position, size, name, description)
+function drawInfoboxes()
     
-    if scale < 1 or scale > 5 then return end
+    local yOffset = 0
     
-    local boxWidth = 150
-    local boxHeight = 70
-    
-    -- fixed position relative to translated center
-    --position = { x = -screenWidth / 2, y = screenHeight / 2 - boxHeight}
-    
-    love.graphics.push()
-    
-    -- box fill
-    love.graphics.setColor({255, 255, 255, 128})
-    love.graphics.rectangle("fill", position.x, position.y, boxWidth, boxHeight)
-    
-    -- outline
-    love.graphics.setLineWidth(4)
-    love.graphics.setColor({255, 255, 255, 192})
-    love.graphics.rectangle("line", position.x, position.y, boxWidth, boxHeight)
-    
-    -- draw title
-    love.graphics.setColor({0, 0, 0, 192})
-    
-    love.graphics.setFont(smallFont)
-    love.graphics.printf(name, position.x, position.y, boxWidth, "center")
-    
-    love.graphics.pop()
+    for i, item in ipairs(infoboxes) do
+        
+        local sx = item.size / scopescale
+        if sx > 1 and sx < 5 then
+        
+            yOffset = yOffset + item.infoH
+            item.infoX = 10
+            item.infoY = yOffset + 50 + item.infoH
+            
+            -- box fill
+            love.graphics.setColor({255, 255, 255, 128})
+            love.graphics.rectangle("fill", 
+                item.infoX, item.infoY, item.infoW, item.infoH)
+            
+            -- outline
+            love.graphics.setLineWidth(4)
+            love.graphics.setColor({255, 255, 255, 192})
+            love.graphics.rectangle("line", 
+                item.infoX, item.infoY, item.infoW, item.infoH)
+            
+            love.graphics.setFont(smallFont)
+            love.graphics.setColor({0, 0, 255})
+            love.graphics.print(item.name, 20, item.infoY)
+            
+            if item.description then
+                love.graphics.setColor({0, 0, 0})
+                love.graphics.setFont(infoFont)
+                love.graphics.printf(item.description, 
+                    20, 
+                    smallFontHeight + item.infoY, 
+                    infoboxWidth, "left")
+            end
 
+        end
+    
+    end
+    
 end
 
 
@@ -324,27 +342,27 @@ end
 
 function buildShowcase()
     
-    addShowcase(1, "Y", "yottameter")
-    addShowcase(1, "Z", "zettameter")
-    addShowcase(1, "E", "exameter")
-    addShowcase(1, "P", "petameter")
-    addShowcase(1, "T", "terameter")
-    addShowcase(1, "G", "gigameter")
-    addShowcase(1, "M", "megameter")
-    addShowcase(1, "k", "kilometer")
-    addShowcase(1, "h", "hectometer")
-    addShowcase(1, "da", "decameter")
-    addShowcase(1, "", "meter")
-    addShowcase(1, "d", "decimeter")
-    addShowcase(1, "c", "centimeter")
-    addShowcase(1, "m", "millimeter")
-    addShowcase(1, "u", "micrometer")
-    addShowcase(1, "n", "nanometer")
-    addShowcase(1, "p", "picometer")
-    addShowcase(1, "f", "femtometer")
-    addShowcase(1, "a", "attometer")
-    addShowcase(1, "z", "zeptometer")
-    addShowcase(1, "y", "yoctometer")
+--    addShowcase(1, "Y", "yottameter")
+--    addShowcase(1, "Z", "zettameter")
+--    addShowcase(1, "E", "exameter")
+--    addShowcase(1, "P", "petameter")
+--    addShowcase(1, "T", "terameter")
+--    addShowcase(1, "G", "gigameter")
+--    addShowcase(1, "M", "megameter")
+--    addShowcase(1, "k", "kilometer")
+--    addShowcase(1, "h", "hectometer")
+--    addShowcase(1, "da", "decameter")
+--    addShowcase(1, "", "meter")
+--    addShowcase(1, "d", "decimeter")
+--    addShowcase(1, "c", "centimeter")
+--    addShowcase(1, "m", "millimeter")
+--    addShowcase(1, "u", "micrometer")
+--    addShowcase(1, "n", "nanometer")
+--    addShowcase(1, "p", "picometer")
+--    addShowcase(1, "f", "femtometer")
+--    addShowcase(1, "a", "attometer")
+--    addShowcase(1, "z", "zeptometer")
+--    addShowcase(1, "y", "yoctometer")
 
     addShowcase(70, "p", "Carbon Atom", 
         love.graphics.newImage("images/carbon.png"), "")
@@ -370,13 +388,16 @@ function buildShowcase()
         love.graphics.newImage("images/coffee-bean.png"), "")
     
     addShowcase(25, "c", "Cat",
-        love.graphics.newImage("images/cat.png"), "")
+        love.graphics.newImage("images/cat.png"), 
+        "Cats average about 23–25 cm in height")
     
     addShowcase(1.83, "", "Human", 
-        love.graphics.newImage("images/human.png"), "")
+        love.graphics.newImage("images/human.png"), 
+        "The average human is 1.83 metres tall")
         
     addShowcase(5.486, "", "Giraffe",
-        love.graphics.newImage("images/giraffe.png"), "")
+        love.graphics.newImage("images/giraffe.png"), 
+        "A giraffe is around 5.4 metres tall")
     
     addShowcase(30, "", "TV Radio Wavelength",
         love.graphics.newImage("images/wave.png"), "")
@@ -502,6 +523,17 @@ function addShowcase(size, unit, name, image, description)
         imageW, imageH = image:getDimensions()
     end
     
+    local textWidth = infoboxWidth * 1.1
+    local textLines = 0
+    local textHeight = smallFont:getHeight()
+    
+    if description then
+        _, textLines = infoFont:getWrap(description, infoboxWidth)
+        textHeight = textHeight + textLines * infoFont:getHeight()
+        -- padding
+        textHeight = textHeight * 1.2
+    end
+    
     table.insert(showcase, 
         {
             sizeFormatted=tostring(size) .. unit,
@@ -510,11 +542,15 @@ function addShowcase(size, unit, name, image, description)
             name=name,
             image=image,
             description=description,
-            x=0,
-            y=0,
+            --x=0,
+            --y=0,
             ox=imageW / 2,
             oy=imageH / 2,
-            r=#showcase % 6
+            r=#showcase % 6,
+            infoX=0,
+            infoY=0,
+            infoW=textWidth,
+            infoH=textHeight
             })
     
 end
