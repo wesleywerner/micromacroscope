@@ -282,16 +282,16 @@ function drawInfoboxes()
         
             yOffset = yOffset + item.infoH
             item.infoX = 10
-            item.infoY = yOffset + 50 + item.infoH
+            item.infoY = yOffset --+ 50 + item.infoH
             
             -- box fill
-            love.graphics.setColor({255, 255, 255, 128})
+            love.graphics.setColor({255, 255, 255, 192})
             love.graphics.rectangle("fill", 
                 item.infoX, item.infoY, item.infoW, item.infoH)
             
             -- outline
             love.graphics.setLineWidth(4)
-            love.graphics.setColor({255, 255, 255, 192})
+            love.graphics.setColor({0, 0, 0, 128})
             love.graphics.rectangle("line", 
                 item.infoX, item.infoY, item.infoW, item.infoH)
             
@@ -365,31 +365,36 @@ function buildShowcase()
 --    addShowcase(1, "y", "yoctometer")
 
     addShowcase(70, "p", "Carbon Atom", 
-        love.graphics.newImage("images/carbon.png"), "")
+        love.graphics.newImage("images/carbon.png"), 
+        "Carbon is the fourth most abundant element in the universe by mass after hydrogen, helium, and oxygen. It is present in all forms of carbon-based life.")
     
-    addShowcase(120, "n", "Flu Virus",
-        love.graphics.newImage("images/flu-virus.png"), "")
+    addShowcase(120, "n", "Influenza Virus",
+        love.graphics.newImage("images/flu-virus.png"), 
+        "Influenza spreads around the world in a yearly outbreak, resulting in about three to five million cases. Hand washing reduces the risk of infection because the virus is inactivated by soap.")
     
-    addShowcase(8, "u", "Red Blood Cell",
-        love.graphics.newImage("images/red-blood-cell.png"), "")
+    addShowcase(4, "u", "Red Blood Cell",
+        love.graphics.newImage("images/red-blood-cell.png"), 
+        "Approximately a quarter of the cells in the human body are red blood cells. Nearly half of the blood's volume (40% to 45%) is red blood cells.")
     
     addShowcase(20, "u", "Intel 4004 transistor",
-        love.graphics.newImage("images/intel-4004-chip.png"), "")
-    
-    addShowcase(180, "u", "1000x Optical Magnification")
-    
+        love.graphics.newImage("images/intel-4004-chip.png"), 
+        "This 4-bit microprocessor was the first commercially available microprocessor by Intel (1971). It had ~2,300 transistors and ran at a clock rate of 740 kHz.")
+        
     addShowcase(0.3, "m", "Grain of Salt",
-        love.graphics.newImage("images/salt.png"), "")
+        love.graphics.newImage("images/salt.png"), 
+        "Salt was prized by the ancient Hebrews, the Greeks, the Romans, the Byzantines, the Hittites and the Egyptians. Salt became an important article of trade and was transported by boat across the Mediterranean Sea, along specially built salt roads, and across the Sahara in camel caravans.")
     
     addShowcase(2, "m", "Fire Ant",
-        love.graphics.newImage("images/fire-ant.png"), "")
+        love.graphics.newImage("images/fire-ant.png"), 
+        "A typical fire ant colony produces large mounds in open areas, and feeds mostly on young plants and seeds.")
     
     addShowcase(12, "m", "Coffee Bean",
-        love.graphics.newImage("images/coffee-bean.png"), "")
+        love.graphics.newImage("images/coffee-bean.png"), 
+        "A coffee bean is a seed of the coffee plant, and is the source for coffee. It is the pit inside the red or purple fruit often referred to as a cherry. Just like ordinary cherries, the coffee fruit is also a so-called stone fruit.")
     
     addShowcase(25, "c", "Cat",
         love.graphics.newImage("images/cat.png"), 
-        "Cats average about 23–25 cm in height")
+        "Cats average about 23–25 cm in height. Cats can hear sounds too faint or too high in frequency for human ears, such as those made by mice and other small animals. They can see in near darkness.")
     
     addShowcase(1.83, "", "Human", 
         love.graphics.newImage("images/human.png"), 
