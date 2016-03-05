@@ -56,6 +56,8 @@ function love.load(arg)
     
     log10max = math.log10(10^24)
     scaleWidthRatio = screenWidth / 2
+    km50 = calculateSizeFromUnits(50, "k")
+    km100 = calculateSizeFromUnits(100, "k")
 
 end
 
@@ -105,6 +107,7 @@ end
 
 function love.draw()
     
+    setBackground()
     love.graphics.setColor({31, 31, 66, 192})
     love.graphics.print("scope scale: " .. tostring(scopescale))
         
@@ -128,6 +131,33 @@ function love.draw()
     drawInfobar()
     
 end
+
+
+-- Adjust the background based on the current scale
+function setBackground()
+    
+    if scopescale > km100 then
+        love.graphics.setBackgroundColor({0, 0, 0})
+    
+    -- 50 km (stratosphere)
+    elseif scopescale > km50 then
+        local d = 1 - (scopescale / km100)
+        d = clamp(0, d, 1)
+        love.graphics.setBackgroundColor({149*d, 250*d, 255*d})
+    
+    -- 1 metre
+    elseif scopescale > 0.001 then
+        love.graphics.setBackgroundColor(LIGHTBLUE)
+        
+    -- smallest
+    elseif scopescale > 0 then
+        love.graphics.setBackgroundColor({255, 255, 255})
+        
+    end
+    
+    
+end
+
 
 
 function drawInfobar()
