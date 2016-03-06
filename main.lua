@@ -433,6 +433,10 @@ function buildShowcase()
         love.graphics.newImage("images/alpha-centauri.png"),
         "Alpha Centauri is the brightest star in the southern Centaurus constellation, the closest star system to us at a mere 4.37 light years away.")
     
+    addShowcase(6, "ly", "Barnard's Star",
+        love.graphics.newImage("images/barnards-star.png"),
+        "At 7–12 billion years of age, Barnard's Star is considerably older than the Sun, which is 4.5 billion years old, and it might be among the oldest stars in the Milky Way galaxy.")
+    
     addShowcase(925, "P", "Milky Way Galaxy",
         love.graphics.newImage("images/milkyway.png"),
         "Our home galaxy is 925,000,000,000,000,000 km across. The Sun does not lie near the center of our Galaxy. It lies about 8 kiloparsecs from the center on what is known as the Sagittarius arm of the Milky Way.")
