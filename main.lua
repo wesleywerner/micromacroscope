@@ -53,7 +53,7 @@ function love.load(arg)
     
     love.graphics.setBackgroundColor(LIGHTBLUE)
     
-    smallFont = love.graphics.newFont(16)
+    smallFont = love.graphics.newFont(18)
     infoFont = love.graphics.newFont(12)
     
     smallFontHeight = smallFont:getHeight()
@@ -273,16 +273,19 @@ end
 
 function drawInfoboxes()
     
-    local yOffset = 0
+    local textPadLeft = 20
+    local textPadTop = 10
+    local boxSpacing = 50   -- space between multiple boxes
+    local yOffset = 20      -- initial offset
     
     for i, item in ipairs(infoboxes) do
         
         local sx = item.size / scopescale
         if sx > 1 and sx < 5 then
         
-            yOffset = yOffset + item.infoH
             item.infoX = 10
-            item.infoY = yOffset --+ 50 + item.infoH
+            item.infoY = yOffset-- + item.infoH
+            yOffset = yOffset + item.infoH + boxSpacing
             
             -- box fill
             love.graphics.setColor({255, 255, 255, 192})
@@ -295,16 +298,18 @@ function drawInfoboxes()
             love.graphics.rectangle("line", 
                 item.infoX, item.infoY, item.infoW, item.infoH)
             
+            -- name
             love.graphics.setFont(smallFont)
             love.graphics.setColor({0, 0, 255})
-            love.graphics.print(item.name, 20, item.infoY)
+            love.graphics.print(item.name, textPadLeft, item.infoY + textPadTop)
             
+            -- descriptions
             if item.description then
                 love.graphics.setColor({0, 0, 0})
                 love.graphics.setFont(infoFont)
                 love.graphics.printf(item.description, 
-                    20, 
-                    smallFontHeight + item.infoY, 
+                    textPadLeft, 
+                    smallFontHeight + item.infoY + textPadTop, 
                     infoboxWidth, "left")
             end
 
@@ -398,14 +403,15 @@ function buildShowcase()
     
     addShowcase(1.83, "", "Human", 
         love.graphics.newImage("images/human.png"), 
-        "The average human is 1.83 metres tall")
+        "Humans are part of the animal kingdom. They are mammals, which means that they give birth to their young ones, rather than laying eggs like reptiles or birds, and females feed their babies with breast milk. The average human is 1.83 metres tall.")
         
     addShowcase(5.486, "", "Giraffe",
         love.graphics.newImage("images/giraffe.png"), 
-        "A giraffe is around 5.4 metres tall")
+        "Fully grown giraffes stand 4.3–5.7 m tall. Giraffe skin is blotched in patterns of browns and yellows. No two giraffes have the same pattern. The different sub-species have different coat patterns.")
     
     addShowcase(30, "", "TV Radio Wavelength",
-        love.graphics.newImage("images/wave.png"), "")
+        love.graphics.newImage("images/wave.png"), 
+        "A wavelength is measured as the distance from the top of one crest to the top of its neighboring crest. While the wavelength of visible light is very very small, less than one micrometer and much less than the thickness of a human hair, radio waves can have a wavelength from a couple centimeters to several meters.")
     
     addShowcase(8.848, "k", "Mount Everest",
         love.graphics.newImage("images/mount-everest.png"),
