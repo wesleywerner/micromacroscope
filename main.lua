@@ -425,11 +425,11 @@ function buildShowcase()
         love.graphics.newImage("images/moon.png"), 
         "The diameter of the Moon is 3474 km. The Moon is thought to have formed approximately 4.5 billion years ago, not long after Earth. A person who jumped as high as possible on the moon would jump higher than on Earth, but still fall back to the ground. Because the Moon has no atmosphere, there is no air resistance, so a feather will fall as fast as a hammer.")
     
-    addShowcase(9.461, "T", "Light Year",
+    addShowcase(1, "ly", "Light Year",
         love.graphics.newImage("images/light_year.png"),
-        "The distance that light travels in one year. Since the speed of light is about 300,000 km per second, then a light year is about 10 trillion kilometers (9.4 × 10^12 km). The light year is used in astronomy because the universe is huge. Space objects such as stars and galaxies may be hundreds, thousands or millions of light years away.")
+        "The distance that light travels in one year. Since the speed of light is about 300,000 km per second, then a light year is about 10 trillion kilometers (9.4 × 10^15 km). The light year is used in astronomy because the universe is huge. Space objects such as stars and galaxies may be hundreds, thousands or millions of light years away.")
     
-    addShowcase(41.2, "T", "Alpha Centauri",
+    addShowcase(4.37, "ly", "Alpha Centauri",
         love.graphics.newImage("images/alpha-centauri.png"),
         "Alpha Centauri is the brightest star in the southern Centaurus constellation, the closest star system to us at a mere 4.37 light years away.")
     
@@ -519,6 +519,9 @@ function calculateSizeFromUnits(size, unit)
    elseif unit == "Y" then
        -- yota
        return size * 10^24
+   elseif unit == "ly" then
+       -- light year
+       return size * (9.4607 * 10^15)
    end
    
    -- Uncalculated for unknown units of measure
