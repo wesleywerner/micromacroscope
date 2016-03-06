@@ -415,22 +415,23 @@ function buildShowcase()
     
     addShowcase(8.848, "k", "Mount Everest",
         love.graphics.newImage("images/mount-everest.png"),
-        "8.848 km is the height of Mount Everest, the highest peak on Earth, on the border between Nepal and China.")
+        "Mount Everest is the largest and highest mountain on Earth. Mount Everest is in the Himalayas. It is about 8,848 metres high on the border between Nepal and China.")
     
-    addShowcase(354, "k", "ISS Altitude",
-        love.graphics.newImage("images/iss.png"), "")
+    addShowcase(354, "k", "ISS",
+        love.graphics.newImage("images/iss.png"), 
+        "The International Space Station is a connected project among several countries: the United States, Russia, Europe, Japan, and Canada. Other nations such as Brazil, Italy, and China also work with the ISS through cooperation with other countries. It orbits the earth every 90 minutes, so the sun looks as if it is rising and setting every 45 minutes. The ISS maintains an orbit with an altitude of between 330 and 435 km.")
 
-    addShowcase(3474.8, "k", "Diameter of the Moon",
-        love.graphics.newImage("images/moon.png"), "")
-    
+    addShowcase(3474.8, "k", "Earth's Moon",
+        love.graphics.newImage("images/moon.png"), 
+        "The diameter of the Moon is 3474 km. The Moon is thought to have formed approximately 4.5 billion years ago, not long after Earth. A person who jumped as high as possible on the moon would jump higher than on Earth, but still fall back to the ground. Because the Moon has no atmosphere, there is no air resistance, so a feather will fall as fast as a hammer.")
     
     addShowcase(9.461, "T", "Light Year",
         love.graphics.newImage("images/light_year.png"),
-        "The distance that light travels in one year, which is 9.4607 × 1012 km")
+        "The distance that light travels in one year. Since the speed of light is about 300,000 km per second, then a light year is about 10 trillion kilometers (9.4 × 10^12 km). The light year is used in astronomy because the universe is huge. Space objects such as stars and galaxies may be hundreds, thousands or millions of light years away.")
     
     addShowcase(41.2, "T", "Alpha Centauri",
         love.graphics.newImage("images/alpha-centauri.png"),
-        "The closest star system to us is a mere 4.37 light years away.")
+        "Alpha Centauri is the brightest star in the southern Centaurus constellation, the closest star system to us at a mere 4.37 light years away.")
     
     addShowcase(925, "P", "Milky Way Galaxy",
         love.graphics.newImage("images/milkyway.png"),
