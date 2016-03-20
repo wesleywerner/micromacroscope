@@ -90,6 +90,47 @@ function love.load(arg)
     km50 = calculateSizeFromUnits(50, "k")
     km100 = calculateSizeFromUnits(100, "k")
 
+    -- Build a lookup of scale names
+    scaleLookup = {}
+    table.insert(scaleLookup, 
+        {value=calculateSizeFromUnits(1, "Y"), factor=10^24, name=" Yotametres"})
+    table.insert(scaleLookup, 
+        {value=calculateSizeFromUnits(1, "Z"), factor=10^21, name=" Zetametres"})
+    table.insert(scaleLookup, 
+        {value=calculateSizeFromUnits(1, "E"), factor=10^18, name=" Exametres"})
+    table.insert(scaleLookup, 
+        {value=calculateSizeFromUnits(9.4607, "P"), factor=9.4607*10^15, name=" Light Years"})
+    table.insert(scaleLookup, 
+        {value=calculateSizeFromUnits(1, "T"), factor=10^12, name=" Terametres"})
+    table.insert(scaleLookup, 
+        {value=calculateSizeFromUnits(1, "G"), factor=10^9, name=" Gigametres"})
+    table.insert(scaleLookup, 
+        {value=calculateSizeFromUnits(1, "M"), factor=10^6, name=" Megametres"})
+    table.insert(scaleLookup, 
+        {value=calculateSizeFromUnits(1, "k"), factor=10^3, name=" Kilometres"})
+    table.insert(scaleLookup, 
+        {value=calculateSizeFromUnits(1, ""), factor=1, name=" Metres"})
+--    table.insert(scaleLookup, 
+--        {value=calculateSizeFromUnits(1, "d"), factor=10^-1, name=" Decimetres"})
+    table.insert(scaleLookup, 
+        {value=calculateSizeFromUnits(1, "c"), factor=10^-2, name=" Centimetres"})
+    table.insert(scaleLookup, 
+        {value=calculateSizeFromUnits(1, "m"), factor=10^-3, name=" Millimetres"})
+    table.insert(scaleLookup, 
+        {value=calculateSizeFromUnits(1, "u"), factor=10^-6, name=" Micrometres"})
+    table.insert(scaleLookup, 
+        {value=calculateSizeFromUnits(1, "n"), factor=10^-9, name=" Nanometres"})
+    table.insert(scaleLookup, 
+        {value=calculateSizeFromUnits(1, "p"), factor=10^-12, name=" Picometres"})
+    table.insert(scaleLookup, 
+        {value=calculateSizeFromUnits(1, "f"), factor=10^-15, name=" Femtometres"})
+    table.insert(scaleLookup, 
+        {value=calculateSizeFromUnits(1, "a"), factor=10^-18, name=" Attometres"})
+    table.insert(scaleLookup, 
+        {value=calculateSizeFromUnits(1, "z"), factor=10^-21, name=" Zeptometres"})
+    table.insert(scaleLookup, 
+        {value=calculateSizeFromUnits(1, "y"), factor=10^-24, name=" Yoctometres"})
+
 end
 
 
@@ -111,12 +152,6 @@ function love.mousepressed(x, y, button)
     if button == "wd" then
         zoomScope(true)
     end
-    
---    if button == "l" then
---        if (x > zoomcontrol.x) then
---            zoomScopeByDelta((y - zoomcontrol.h/2) / zoomcontrol.h)
---        end
---    end
     
 end
 
@@ -198,12 +233,6 @@ function drawZoomControl()
         zoomcontrol.ox,  -- ox
         0   -- oy
         )
---    love.graphics.setColor({0, 255, 0, 64})
---    love.graphics.rectangle("fill", 
---        zoomcontrol.x,
---        zoomcontrol.y,
---        zoomcontrol.w,
---        zoomcontrol.h)
 end
 
 
@@ -275,8 +304,8 @@ function drawInfobar()
     love.graphics.pop()
 
     love.graphics.setColor({0, 0, 0, 255})
-    love.graphics.printf("scale: " .. tostring(scopescale),
-        0, screenHeight - 40, screenWidth, "center")
+    love.graphics.printf(getScaleUnitName(), 
+        0, screenHeight - barHeight, screenWidth, "center")
 
 end
 
@@ -600,6 +629,17 @@ function calculateSizeFromUnits(size, unit)
    -- Uncalculated for unknown units of measure
    return size
     
+end
+
+
+-- gets the current unit of measure name
+function getScaleUnitName()
+    for _, lookup in ipairs(scaleLookup) do
+        if scopescale > lookup.value then
+            return tostring(round(scopescale / lookup.factor)) .. lookup.name
+        end
+    end
+    return ""
 end
 
 
