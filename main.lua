@@ -91,9 +91,17 @@ function love.mousepressed(x, y, button)
 end
 
 
+function love.touchgestured( x, y, theta, distance, touchcount )
+   
+   local dist = clamp(-0.7, distance * 100, 0.7)
+   targetscale = scopescale + (scopescale * dist)
+    
+end
+
+
 function love.update(dt)
     
-    updateTimers(dt)
+    --updateTimers(dt)
     
     if love.keyboard.isDown('w') then
         zoomScope(false)
