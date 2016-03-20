@@ -19,6 +19,13 @@ infoboxWidth = 200
 screenWidth, screenHeight = love.graphics.getDimensions()
 screenOrigin = {x = screenWidth / 2, y = screenHeight / 2}
 
+-- the zoom control zone
+zoomcontrol = {}
+zoomcontrol.w = screenWidth * 0.1   -- 10% right aligned
+zoomcontrol.h = screenHeight - screenHeight * 0.1   -- 10% from the bottom
+zoomcontrol.x = screenWidth - zoomcontrol.w
+zoomcontrol.y = 0
+
 -- Simple number rounding function
 function round(num, idp)
   local mult = 10^(idp or 0)
@@ -48,6 +55,20 @@ function zoomScope(zoomIn)
     
 end
 
+
+-- zoom the scope by a delta value of -1..1 where 1 is the max zoom
+-- speed, negative toggles the direction of the zoom
+function zoomScopeByDelta(delta)
+    
+    local zoomamount = 0.85 * delta
+    
+    local direction = delta / delta     -- yields either 1 or -1
+    
+    if zoomamount ~= 0 then
+        targetscale = scopescale + (scopescale * zoomamount) * direction
+    end
+    
+end
 
 function love.load(arg)
     
@@ -88,6 +109,12 @@ function love.mousepressed(x, y, button)
         zoomScope(true)
     end
     
+--    if button == "l" then
+--        if (x > zoomcontrol.x) then
+--            zoomScopeByDelta((y - zoomcontrol.h/2) / zoomcontrol.h)
+--        end
+--    end
+    
 end
 
 
@@ -109,6 +136,14 @@ function love.update(dt)
     
     if love.keyboard.isDown('s') then
         zoomScope(true)
+    end
+    
+    -- detect mouse / touch on the zoom control
+    if love.mouse.isDown("l") then
+        local mousex, mousey = love.mouse.getPosition()
+        if (mousex > zoomcontrol.x and mousex < zoomcontrol.x + zoomcontrol.w) then
+            zoomScopeByDelta((mousey - zoomcontrol.h/2) / zoomcontrol.h)
+        end
     end
     
     -- Move the scope scale towards the target scale
@@ -146,7 +181,18 @@ function love.draw()
     love.graphics.origin()
     drawInfobar()
     drawInfoboxes()
+    drawZoomControl()
     
+end
+
+
+function drawZoomControl()
+    love.graphics.setColor({0, 255, 0, 64})
+    love.graphics.rectangle("fill", 
+        zoomcontrol.x,
+        zoomcontrol.y,
+        zoomcontrol.w,
+        zoomcontrol.h)
 end
 
 
