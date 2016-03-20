@@ -25,6 +25,9 @@ zoomcontrol.w = screenWidth * 0.1   -- 10% right aligned
 zoomcontrol.h = screenHeight - screenHeight * 0.1   -- 10% from the bottom
 zoomcontrol.x = screenWidth - zoomcontrol.w
 zoomcontrol.y = 0
+zoomcontrol.image = love.graphics.newImage("images/zoomcontrol.png")
+zoomcontrol.scale = zoomcontrol.h / zoomcontrol.image:getHeight()
+zoomcontrol.ox = -zoomcontrol.w / 2
 
 -- Simple number rounding function
 function round(num, idp)
@@ -60,7 +63,7 @@ end
 -- speed, negative toggles the direction of the zoom
 function zoomScopeByDelta(delta)
     
-    local zoomamount = 0.85 * delta
+    local zoomamount = 1 * delta
     
     local direction = delta / delta     -- yields either 1 or -1
     
@@ -159,11 +162,9 @@ function love.draw()
     
     setBackground()
     infoboxes = {}
-    love.graphics.setColor({31, 31, 66, 192})
-    love.graphics.print("scope scale: " .. tostring(scopescale))
-        
-    local fps = love.timer.getFPS()
-    love.graphics.print("fps: " .. tostring(fps), 0, 20)
+    
+--    local fps = love.timer.getFPS()
+--    love.graphics.print("fps: " .. tostring(fps), 0, 20)
 
     -- New graphics stack for drawing the showcase
     love.graphics.push()
@@ -187,12 +188,22 @@ end
 
 
 function drawZoomControl()
-    love.graphics.setColor({0, 255, 0, 64})
-    love.graphics.rectangle("fill", 
+    love.graphics.setColor({255, 255, 255, 128})
+    love.graphics.draw(zoomcontrol.image,
         zoomcontrol.x,
         zoomcontrol.y,
-        zoomcontrol.w,
-        zoomcontrol.h)
+        0,  -- rotation
+        zoomcontrol.scale,
+        zoomcontrol.scale,
+        zoomcontrol.ox,  -- ox
+        0   -- oy
+        )
+--    love.graphics.setColor({0, 255, 0, 64})
+--    love.graphics.rectangle("fill", 
+--        zoomcontrol.x,
+--        zoomcontrol.y,
+--        zoomcontrol.w,
+--        zoomcontrol.h)
 end
 
 
@@ -262,6 +273,10 @@ function drawInfobar()
     love.graphics.pop()
     
     love.graphics.pop()
+
+    love.graphics.setColor({0, 0, 0, 255})
+    love.graphics.printf("scale: " .. tostring(scopescale),
+        0, screenHeight - 40, screenWidth, "center")
 
 end
 
