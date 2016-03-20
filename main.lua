@@ -10,6 +10,8 @@ targetscale = scopescale
 
 showcase = {}
 
+visibleShowcases = {}
+
 infoboxes = {}
 
 infoboxWidth = 200
@@ -33,6 +35,11 @@ zoomcontrol.ox = -zoomcontrol.w / 2
 function round(num, idp)
   local mult = 10^(idp or 0)
   return math.floor(num * mult + 0.5) / mult
+end
+
+-- Distance calculator
+function dist(x1, y1, x2, y2)
+    return math.sqrt((x1 - x2)^2 + (y1 - y2)^2)
 end
 
 
@@ -153,8 +160,22 @@ function love.mousepressed(x, y, button)
         zoomScope(true)
     end
     
+    if button == "l" then
+        dragitem = getNearestShowcase(x, y)
+        if dragitem then
+            dragitem.clickedX = dragitem.x + x
+            dragitem.clickedY = dragitem.y + y
+        end
+    end
+    
 end
 
+
+function love.mousereleased(x, y, button)
+    if button == "l" then
+        dragitem = nil
+    end
+end
 
 function love.touchgestured( x, y, theta, distance, touchcount )
    
@@ -176,12 +197,21 @@ function love.update(dt)
         zoomScope(true)
     end
     
-    -- detect mouse / touch on the zoom control
     if love.mouse.isDown("l") then
         local mousex, mousey = love.mouse.getPosition()
+        
+        -- detect mouse / touch on the zoom control
         if (mousex > zoomcontrol.x and mousex < zoomcontrol.x + zoomcontrol.w) then
             zoomScopeByDelta((mousey - zoomcontrol.h/2) / zoomcontrol.h)
+        else
+        
+            -- if not over the zoom control, drag a showcase on screen
+            if dragitem then
+                dragitem.offsetX = mousex - dragitem.clickedX
+                dragitem.offsetY = mousey - dragitem.clickedY
+            end
         end
+        
     end
     
     -- Move the scope scale towards the target scale
@@ -197,6 +227,7 @@ function love.draw()
     
     setBackground()
     infoboxes = {}
+    visibleShowcases = {}
     
 --    local fps = love.timer.getFPS()
 --    love.graphics.print("fps: " .. tostring(fps), 0, 20)
@@ -318,6 +349,11 @@ function drawShowcase(item)
     -- limit visiblity to items in the 0.1 .. 10 scale range
     if sx < 0.1 or sx > 10 then return end
     
+    -- Keep a list of showcases that can be dragged
+    if sx > 1 and sx < 5 then
+        table.insert(visibleShowcases, item)
+    end
+    
     love.graphics.push()
     
     -- Fade objects in and out of view
@@ -345,6 +381,13 @@ function drawShowcase(item)
     
     -- translate position of the item
     love.graphics.translate(ix, iy)
+    
+    -- translate internal showcase offset
+    love.graphics.translate(item.offsetX, item.offsetY)
+    
+    -- store the showcase position
+    item.x = ix
+    item.y = iy
     
     -- scale the item
     local scaleClamped = clamp(0, sx, 2)
@@ -643,6 +686,21 @@ function getScaleUnitName()
 end
 
 
+-- returns the nearest visible showcase
+function getNearestShowcase(x, y)
+    local nearest = nil
+    local nearestDist = 1000
+    for _, item in pairs(visibleShowcases) do
+        local thisDist = dist(x, y, item.x, item.y)
+        if thisDist < nearestDist then
+            nearest = item
+            nearestDist = thisDist
+        end
+    end
+    return nearest
+end
+
+
 function addShowcase(size, unit, name, image, description)
     
     local imageW, imageH = 0, 0
@@ -670,8 +728,12 @@ function addShowcase(size, unit, name, image, description)
             name=name,
             image=image,
             description=description,
-            --x=0,
-            --y=0,
+            x=0,
+            y=0,
+            offsetX=0,
+            offsetY=0,
+            clickedX=0,
+            clickedY=0,
             ox=imageW / 2,
             oy=imageH / 2,
             r=#showcase % 6,
