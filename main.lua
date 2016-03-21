@@ -582,6 +582,10 @@ function buildShowcase()
         love.graphics.newImage("images/wave.png"), 
         "A wavelength is measured as the distance from the top of one crest to the top of its neighboring crest. While the wavelength of visible light is very very small, less than one micrometer and much less than the thickness of a human hair, radio waves can have a wavelength from a couple centimeters to several meters.")
     
+    addShowcase(100, "", "100 metre sprint",
+        love.graphics.newImage("images/100m-sprint.jpg"),
+        "The 100-meter dash, is a sprint race in track and field competitions. The shortest common outdoor running distance, it is one of the most popular and prestigious events in the sport of athletics. The reigning 100 m Olympic champion is often named \"the fastest man in the world.\" The current men's world record is 9.58 seconds, set by Jamaica's Usain Bolt in 2009, while the women's world record of 10.49 seconds set by American Florence Griffith-Joyner in 1988 remains unbroken.")
+    
     addShowcase(8.848, "k", "Mount Everest",
         love.graphics.newImage("images/mount-everest.png"),
         "Mount Everest is the largest and highest mountain on Earth. Mount Everest is in the Himalayas. It is about 8,848 metres high on the border between Nepal and China.")

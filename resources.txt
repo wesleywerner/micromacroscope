@@ -5,3 +5,6 @@ http://imagine.gsfc.nasa.gov/features/cosmic/
 A Sense of Scale
 Paul Falstad
 http://www.falstad.com/scale/
+
+List of examples of lengths
+https://en.wikipedia.org/wiki/List_of_examples_of_lengths
