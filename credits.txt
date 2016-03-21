@@ -93,3 +93,7 @@ https://upload.wikimedia.org/wikipedia/commons/f/ff/Amazonrivermap.svg
 Mars
 By NASA, ESA, and The Hubble Heritage Team (STScI/AURA) [Public domain], via Wikimedia Commons
 https://upload.wikimedia.org/wikipedia/commons/5/58/Mars_23_aug_2003_hubble.jpg
+
+Latitude and longitude graticule on an ellipsoid
+By Peter Mercator (Own work) [Public domain], via Wikimedia Commons
+https://upload.wikimedia.org/wikipedia/commons/8/8c/Latitude_and_longitude_graticule_on_an_ellipsoid.svg
