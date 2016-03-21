@@ -354,7 +354,7 @@ function drawInfobar()
     for _, item in pairs(visibleShowcases) do
         
         -- draw this item on the minimap
-        if not item.mapped then
+        if not item.mapped and item.scale >= 1 and item.scale <= 1.2 then
             love.graphics.push()
             love.graphics.setCanvas(minimap)
             local imageHalf = item.image:getWidth() * 0.05 / 2
@@ -380,6 +380,7 @@ function drawShowcase(item)
     
     -- Keep a list of showcases that can be dragged
     if sx > 1 and sx < 5 then
+        item.scale = sx
         table.insert(visibleShowcases, item)
     end
     
