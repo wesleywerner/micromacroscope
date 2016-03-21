@@ -357,7 +357,8 @@ function drawInfobar()
         if not item.mapped then
             love.graphics.push()
             love.graphics.setCanvas(minimap)
-            love.graphics.translate(scalePosition, 0)
+            local imageHalf = item.image:getWidth() * 0.05 / 2
+            love.graphics.translate(scalePosition - imageHalf, 0)
             love.graphics.draw(item.image, 0, 0, 0, 0.05, 0.05)
             love.graphics.setCanvas()
             love.graphics.pop()
