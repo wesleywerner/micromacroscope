@@ -604,6 +604,10 @@ function buildShowcase()
         love.graphics.newImage("images/moon.png"), 
         "The diameter of the Moon is 3474 km. The Moon is thought to have formed approximately 4.5 billion years ago, not long after Earth. A person who jumped as high as possible on the moon would jump higher than on Earth, but still fall back to the ground. Because the Moon has no atmosphere, there is no air resistance, so a feather will fall as fast as a hammer.")
     
+    addShowcase(6.762, "M", "Amazon River",
+        love.graphics.newImage("images/amazon-river.jpg"),
+        "The River Amazon in South America is the second longest river at around 6,762 km")
+    
     addShowcase(1, "ly", "Light Year",
         love.graphics.newImage("images/light_year.png"),
         "The distance that light travels in one year. Since the speed of light is about 300,000 km per second, then a light year is about 10 trillion kilometers (9.4 × 10^15 km). The light year is used in astronomy because the universe is huge. Space objects such as stars and galaxies may be hundreds, thousands or millions of light years away.")
