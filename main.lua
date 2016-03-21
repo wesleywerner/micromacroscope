@@ -31,6 +31,9 @@ zoomcontrol.image = love.graphics.newImage("images/zoomcontrol.png")
 zoomcontrol.scale = zoomcontrol.h / zoomcontrol.image:getHeight()
 zoomcontrol.ox = -zoomcontrol.w / 2
 
+-- the minimap draws icons of showcase items
+minimap = love.graphics.newCanvas (screenWidth, 40)
+
 -- Simple number rounding function
 function round(num, idp)
   local mult = 10^(idp or 0)
@@ -307,6 +310,10 @@ function drawInfobar()
     love.graphics.rectangle("fill", 0, 
         screenHeight - barHeight, screenWidth, barHeight)
     
+    -- minimap
+    love.graphics.setColor({255, 255, 255, 255})
+    love.graphics.draw(minimap, 0, screenHeight - barHeight)
+
     -- outline
     love.graphics.setLineWidth(3)
     
@@ -333,11 +340,29 @@ function drawInfobar()
     love.graphics.pop()
     
     love.graphics.pop()
-
+    
+    -- print the scale and units name
     love.graphics.setColor({0, 0, 0, 255})
     love.graphics.printf(getScaleUnitName(), 
-        0, screenHeight - barHeight, screenWidth, "center")
-
+        0, screenHeight - smallFont:getHeight(), screenWidth, "center")
+    
+    -- draw minmap icons
+    love.graphics.setColor({255, 255, 255, 255})
+    for _, item in pairs(visibleShowcases) do
+        
+        -- draw this item on the minimap
+        if not item.mapped then
+            love.graphics.push()
+            love.graphics.setCanvas(minimap)
+            love.graphics.translate(scalePosition, 0)
+            love.graphics.draw(item.image, 0, 0, 0, 0.05, 0.05)
+            love.graphics.setCanvas()
+            love.graphics.pop()
+            item.mapped = true
+        end
+        
+    end
+    
 end
 
 
