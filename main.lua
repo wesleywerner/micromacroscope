@@ -164,10 +164,13 @@ function love.mousepressed(x, y, button)
     end
     
     if button == "l" then
-        dragitem = getNearestShowcase(x, y)
-        if dragitem then
-            dragitem.clickedX = dragitem.x + x
-            dragitem.clickedY = dragitem.y + y
+        -- not on the zoom control
+        if not (x > zoomcontrol.x and x < zoomcontrol.x + zoomcontrol.w) then
+            dragitem = getNearestShowcase(x, y)
+            if dragitem then
+                dragitem.clickedX = dragitem.x + x
+                dragitem.clickedY = dragitem.y + y
+            end
         end
     end
     
