@@ -612,6 +612,14 @@ function buildShowcase()
         love.graphics.newImage("images/mars.png"),
         "Mars is the fourth planet from the Sun and the second smallest planet in the Solar System, after Mercury, with a diameter of 6,792 km")
     
+    addShowcase(40, "M", "Earth",
+        love.graphics.newImage("images/equator.png"),
+        "The equatorial circumference of the Earth is 40,000 km")
+    
+    addShowcase(96, "M", "Highways in India",
+        nil,
+        "The total length of National Highways in India run over 96 Megametres, or 96,000 km")
+    
     addShowcase(1, "ly", "Light Year",
         love.graphics.newImage("images/light_year.png"),
         "The distance that light travels in one year. Since the speed of light is about 300,000 km per second, then a light year is about 10 trillion kilometers (9.4 × 10^15 km). The light year is used in astronomy because the universe is huge. Space objects such as stars and galaxies may be hundreds, thousands or millions of light years away.")
