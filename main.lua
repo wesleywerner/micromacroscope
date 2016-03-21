@@ -204,7 +204,7 @@ function love.update(dt)
         local mousex, mousey = love.mouse.getPosition()
         
         -- detect mouse / touch on the zoom control
-        if (mousex > zoomcontrol.x and mousex < zoomcontrol.x + zoomcontrol.w) then
+        if (not dragitem and mousex > zoomcontrol.x and mousex < zoomcontrol.x + zoomcontrol.w) then
             zoomScopeByDelta((mousey - zoomcontrol.h/2) / zoomcontrol.h)
         else
         
