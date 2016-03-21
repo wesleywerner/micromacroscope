@@ -354,7 +354,7 @@ function drawInfobar()
     for _, item in pairs(visibleShowcases) do
         
         -- draw this item on the minimap
-        if not item.mapped and item.scale >= 1 and item.scale <= 1.2 then
+        if item.image and not item.mapped and item.scale >= 1 and item.scale <= 1.2 then
             love.graphics.push()
             love.graphics.setCanvas(minimap)
             local imageHalf = item.image:getWidth() * 0.05 / 2
@@ -607,6 +607,10 @@ function buildShowcase()
     addShowcase(6.762, "M", "Amazon River",
         love.graphics.newImage("images/amazon-river.jpg"),
         "The River Amazon in South America is the second longest river at around 6,762 km")
+    
+    addShowcase(6.792, "M", "Diameter of Mars",
+        love.graphics.newImage("images/mars.png"),
+        "Mars is the fourth planet from the Sun and the second smallest planet in the Solar System, after Mercury, with a diameter of 6,792 km")
     
     addShowcase(1, "ly", "Light Year",
         love.graphics.newImage("images/light_year.png"),
