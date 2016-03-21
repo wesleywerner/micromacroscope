@@ -620,6 +620,10 @@ function buildShowcase()
         love.graphics.newImage("images/india-highway.jpg"),
         "The total length of National Highways in India run over 96,000 km. The longest national highway is NH7, which runs between Varanasi in Uttar Pradesh and Kanyakumari in Tamil Nadu, at the southernmost point of the Indian mainland, covering a distance of 2,369 km")
     
+    addShowcase(120, "M", "Saturn",
+        love.graphics.newImage("images/Saturn,_Earth_size_comparison.jpg"),
+        "The diameter of Saturn is 120,000 km. Saturn is the sixth planet from the Sun and the second-largest in the Solar System, after Jupiter. It is a gas giant with an average radius about nine times that of Earth. Saturn is named after the Roman god of agriculture; its astronomical symbol (♄) represents the god's sickle.")
+    
     addShowcase(1, "ly", "Light Year",
         love.graphics.newImage("images/light_year.png"),
         "The distance that light travels in one year. Since the speed of light is about 300,000 km per second, then a light year is about 10 trillion kilometers (9.4 × 10^15 km). The light year is used in astronomy because the universe is huge. Space objects such as stars and galaxies may be hundreds, thousands or millions of light years away.")
