@@ -617,8 +617,8 @@ function buildShowcase()
         "The equatorial circumference of the Earth is 40,000 km")
     
     addShowcase(96, "M", "Highways in India",
-        nil,
-        "The total length of National Highways in India run over 96 Megametres, or 96,000 km")
+        love.graphics.newImage("images/india-highway.jpg"),
+        "The total length of National Highways in India run over 96,000 km. The longest national highway is NH7, which runs between Varanasi in Uttar Pradesh and Kanyakumari in Tamil Nadu, at the southernmost point of the Indian mainland, covering a distance of 2,369 km")
     
     addShowcase(1, "ly", "Light Year",
         love.graphics.newImage("images/light_year.png"),
